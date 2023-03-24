@@ -1,0 +1,12 @@
+def workdir_files(path, lvl):
+    if lvl < 4:
+        pages = []
+        # pages.append(os.listdir(path))
+        for enter in os.listdir(path):
+            pages.append(enter)
+            if os.path.isdir(path + '\\' + enter):
+                next_list = workdir_files(path + '\\' + enter, lvl + 1)
+                pages.append(next_list)
+            # pages.append(enter)
+        print(pages)
+        return pages
