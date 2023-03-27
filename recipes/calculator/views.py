@@ -20,7 +20,11 @@ DATA = {
 }
 
 def recipes(request):
-    render(request, 'index.html', DATA)
+    context = {
+        'recipe': {}
+    }
+    context['recipe'] = DATA.get(item, )
+    return render(request, 'calculator/index.html', context)
 # Напишите ваш обработчик. Используйте DATA как источник данных
 # Результат - render(request, 'calculator/index.html', context)
 # В качестве контекста должен быть передан словарь с рецептом:
@@ -30,3 +34,12 @@ def recipes(request):
 #     'ингредиент2': количество2,
 #   }
 # }
+def test_print(request):
+
+    context = {
+        'first': [1, 2, 3]
+    }
+    return render(request, 'test_print.html', context)
+
+def why_not_work(request):
+    return render(request, 'test_print.html')
