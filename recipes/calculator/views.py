@@ -21,36 +21,21 @@ DATA = {
 
 
 def recipes(request, item):
-    servings = 0
     context = {}
-    for key, value in DATA.items():
-        if key == item:
-            servings = request.GET.get('servings')
-            for i in value.keys():
-                value[i] *= int(servings)
-            context['recipe'] = value
-            return render(request, 'calculator/index.html', context)
+    if DATA.get(item) is None:
+        pass
+    else:
+        servings = request.GET.get('servings')
+        if servings is None:
+            context['recipe'] = DATA[item]
+        else:
+            context['recipe'] = DATA[item].copy()
+            for ckey, cvalue in context['recipe'].items():
+                cvalue *= int(servings)
+                context['recipe'][ckey] = round(cvalue, 2)
 
-    # context = {
-    #
-    #     'recipe': {
-    #         'яйца, шт': 2,
-    #         'молоко, л': 0.1,
-    #         'соль, ч.л.': 0.5,
-    #     }
-    # }
-    # for key, value in DATA.items():
-    #     context['recipe'] = value
-    # return render(request, 'calculator/index.html', context)
-# Напишите ваш обработчик. Используйте DATA как источник данных
-# Результат - render(request, 'calculator/index.html', context)
-# В качестве контекста должен быть передан словарь с рецептом:
-# context = {
-#   'recipe': {
-#     'ингредиент1': количество1,
-#     'ингредиент2': количество2,
-#   }
-# }
+    return render(request, 'calculator/index.html', context)
+
 def test_print(request):
 
     context = {
