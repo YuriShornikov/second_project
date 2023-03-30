@@ -35,13 +35,3 @@ def recipes(request, item):
                 context['recipe'][ckey] = round(cvalue, 2)
 
     return render(request, 'calculator/index.html', context)
-
-def test_print(request):
-
-    context = {
-        'first': [1, 2, 3]
-    }
-    return render(request, 'test_print.html', context)
-
-def why_not_work(request):
-    return render(request, 'test_print.html')

@@ -15,11 +15,8 @@ Including another URLconf
 """
 
 from django.urls import path
-from calculator.views import recipes, test_print, why_not_work
+from calculator.views import recipes
 
 urlpatterns = [
     path('<item>/', recipes),
-    path('test1/', test_print),
-    path('test/', why_not_work)
-    # здесь зарегистрируйте вашу view-функцию
 ]
